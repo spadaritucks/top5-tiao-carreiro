@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->string("youtube_url");
+            $table->string("status");
             $table->timestamps();
         });
     }
