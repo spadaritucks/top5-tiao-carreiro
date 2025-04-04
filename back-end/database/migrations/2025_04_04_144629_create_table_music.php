@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string("title");
             $table->string("thumb");
             $table->integer("visualizations");
+            $table->timestamps();
         });
     }
 

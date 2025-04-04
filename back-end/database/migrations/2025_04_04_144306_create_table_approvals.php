@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('recomendation_id')->constrained('recomendations')->onDelete('cascade');
             $table->boolean('approval');
+            $table->timestamps();
         });
     }
 
