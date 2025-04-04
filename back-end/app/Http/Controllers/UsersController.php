@@ -48,6 +48,7 @@ class UsersController extends Controller
             ]);
 
             $type = Types::create([
+                "user_id" => $user->id,
                 "type" => $request->type
             ]);
 
@@ -69,8 +70,7 @@ class UsersController extends Controller
         try {
             $user = Users::findOrFail($id);
             $user->delete();
-            return response()->json(
-                [
+            return response()->json([
                     "message" => "Usuario excluido com sucesso",
                     "user" => $user
                 ]
