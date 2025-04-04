@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Types;
 use App\Models\Users;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,17 +43,40 @@ class UsersController extends Controller
             $user = Users::create([
                 "name" => $request->name,
                 "email" => $request->email,
-                "password" => Hash::make($request->password)
+                "password" => Hash::make($request->password),
+
+            ]);
+
+            $type = Types::create([
+                "type" => $request->type
             ]);
 
             DB::commit();
 
             return response()->json([
                 "message" => "Usuario Criado com Sucesso",
-                "user" => $user
+                "user" => $user,
+                "type" => $type
             ], 201);
         } catch (Exception $e) {
             return response()->json(["message" => "Falha ao criar o usuario " . $e->getMessage()], 400);
+        }
+    }
+
+    public function deleteUser(String $id)
+    {
+
+        try {
+            $user = Users::findOrFail($id);
+            $user->delete();
+            return response()->json(
+                [
+                    "message" => "Usuario excluido com sucesso",
+                    "user" => $user
+                ]
+            );
+        } catch (Exception $e) {
+            return response()->json(["message" => "Falha ao excluir o usuario " . $e->getMessage()], 400);
         }
     }
 }
