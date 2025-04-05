@@ -10,6 +10,18 @@ use Illuminate\Support\Facades\DB;
 class RecomendationsController extends Controller
 {
 
+    public function getAllRecomendations(){
+        try{
+
+            $recomendations = Recomendations::all();
+
+            return response()->json(["recomendations" => $recomendations]);
+
+        }catch(Exception $e){
+            return response()->json(["message" => "Falha ao listar recomendações " . $e->getMessage()]);
+        }
+    }
+
     public function createRecomendation(Request $request)
     {
 
@@ -17,11 +29,11 @@ class RecomendationsController extends Controller
 
             DB::beginTransaction();
 
-            
-
+        
             $recomendation = Recomendations::create([
                 "user_id" => $request->user_id,
-                "youtube_url" => $request->youtube_url
+                "youtube_url" => $request->youtube_url,
+                "status" => $request->status
             ]);
 
             DB::commit();

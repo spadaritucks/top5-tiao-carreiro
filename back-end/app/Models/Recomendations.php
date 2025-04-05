@@ -11,7 +11,8 @@ class Recomendations extends Model
 
     protected $fillable = [
         'user_id',
-        "youtube_url"
+        "youtube_url",
+        "status"
     ];
 
     public function user(){
