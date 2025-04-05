@@ -26,15 +26,32 @@ class MusicController extends Controller
         }
     }
 
+
+    public function getAllSongs () {
+        try {
+
+            $songs = DB::table('music')->orderBy("visualizations","desc")
+            ->paginate(5);
+
+            
+            return response()->json(["songs" => $songs ]);
+            
+        } catch (Exception $e) {
+            return response()->json(["message" => "Falha ao listar as musicas " . $e->getMessage()], 400);
+        }
+    }
+
     public function approveOrCreateMusic(Request $request)
     {
         try {
-
+            // Validar que approval seja um booleano
+            $approval = filter_var($request->approval, FILTER_VALIDATE_BOOLEAN);
+            
             DB::beginTransaction();
 
             Approvals::create([
                 "recomendation_id" => $request->recomendation_id,
-                "approval" => $request->approval
+                "approval" => $approval
             ]);
 
             $recomendation = Recomendations::findOrFail($request->recomendation_id);
@@ -42,7 +59,8 @@ class MusicController extends Controller
                 "status" => $request->status,
             ]);
 
-            if ($request->approval == false) {
+            if (!$approval) {
+                DB::commit();
                 return response()->json(["message" => "Musica Reprovada com Sucesso"]);
             }
 
@@ -55,19 +73,18 @@ class MusicController extends Controller
                 "visualizations" => $request->visualizations
             ]);
 
+            DB::commit();
             return response()->json(
                 [
                     "message" => "Musica Aprovada e Criada com Sucesso",
                     "music" => $music
                 ]
-
             );
-
-            DB::commit();
         } catch (Exception $e) {
+            DB::rollBack();
             return response()->json([
                 "message" => "Erro ao registrar a musica " . $e->getMessage()
-            ]);
+            ], 500);
         }
     }
 }
