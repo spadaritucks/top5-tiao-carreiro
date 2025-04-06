@@ -16,8 +16,8 @@ class UsersController extends Controller
     public function getAllUsers()
     {
         try {
-            $users = Users::all();
-            return response()->json(["users" => $users]);
+            $users = Users::with('types')->get();
+            return response()->json(["users" => $users],200);
         } catch (Exception $e) {
             return response()->json(["message" => "Falha ao listar os usuarios " . $e->getMessage()], 400);
         }
@@ -26,8 +26,8 @@ class UsersController extends Controller
     public function getUserById(String $id)
     {
         try {
-            $user = Users::findOrFail($id);
-            return response()->json(["user" => $user]);
+            $user = Users::with('types')->findOrFail($id);
+            return response()->json(["user" => $user],200);
         } catch (Exception $e) {
             return response()->json(["message" => "Falha ao listar o usuario " . $e->getMessage()], 400);
         }
@@ -36,8 +36,6 @@ class UsersController extends Controller
 
     public function createUser(Request $request)
     {
-
-
         try {
             DB::beginTransaction();
             $user = Users::create([
@@ -60,7 +58,7 @@ class UsersController extends Controller
                 "type" => $type
             ], 201);
         } catch (Exception $e) {
-            return response()->json(["message" => "Falha ao criar o usuario " . $e->getMessage()], 400);
+            return response()->json(["message" => "Falha ao criar o usuario " . $e->getMessage()], 500);
         }
     }
 
@@ -73,7 +71,7 @@ class UsersController extends Controller
             return response()->json([
                     "message" => "Usuario excluido com sucesso",
                     "user" => $user
-                ]
+            ],200
             );
         } catch (Exception $e) {
             return response()->json(["message" => "Falha ao excluir o usuario " . $e->getMessage()], 400);
