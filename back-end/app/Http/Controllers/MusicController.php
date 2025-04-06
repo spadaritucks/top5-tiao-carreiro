@@ -34,7 +34,7 @@ class MusicController extends Controller
             ->paginate(5);
 
             
-            return response()->json(["songs" => $songs ]);
+            return response()->json(["songs" => $songs ],200);
             
         } catch (Exception $e) {
             return response()->json(["message" => "Falha ao listar as musicas " . $e->getMessage()], 400);
@@ -78,7 +78,7 @@ class MusicController extends Controller
                 [
                     "message" => "Musica Aprovada e Criada com Sucesso",
                     "music" => $music
-                ]
+                ],201
             );
         } catch (Exception $e) {
             DB::rollBack();

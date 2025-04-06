@@ -41,11 +41,11 @@ class RecomendationsController extends Controller
             return response()->json([
                 "message" => "Recomendação Enviada",
                 "recomendation" => $recomendation
-            ]);
+            ],201);
 
 
         } catch (Exception $e) {
-            return response()->json(["message" => "Falha ao criar recomendação " . $e->getMessage()]);
+            return response()->json(["message" => "Falha ao criar recomendação " . $e->getMessage()],500);
         }
     }
 }
