@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "name": "João Silva",
+      "email": "joao.silva@exemplo.com",
+      "password": "senha123",
+      "type": "admin"
+    },
+    {
+      "name": "Maria Oliveira",
+      "email": "maria.oliveira@exemplo.com",
+      "password": "senha456",
+      "type": "moderador"
+    },
+    {
+      "name": "Pedro Santos",
+      "email": "pedro.santos@exemplo.com",
+      "password": "senha789",
+      "type": "usuario"
+    },
+    {
+      "name": "Ana Costa",
+      "email": "ana.costa@exemplo.com",
+      "password": "senha101",
+      "type": "artista"
+    },
+    {
+      "name": "Carlos Ferreira",
+      "email": "carlos.ferreira@exemplo.com",
+      "password": "senha202",
+      "type": "produtor"
+    }
+  ]
+} 
