@@ -37,6 +37,7 @@ class UsersController extends Controller
     public function createUser(Request $request)
     {
         try {
+
             DB::beginTransaction();
             $user = Users::create([
                 "name" => $request->name,
