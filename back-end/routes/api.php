@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post("/login", [LoginController::class, "authLogin"]);
 Route::post('/users', [UsersController::class, "createUser"]);
+Route::get("/songs",[MusicController::class, "getAllSongs"]);
 
 Route::middleware('auth:sanctum')->group(function () {
    
@@ -25,7 +26,6 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::prefix("/songs")->middleware(['auth:sanctum', 'is_admin'])->group(function () {
-        Route::get("/",[MusicController::class, "getAllSongs"]);
         Route::post('/',[MusicController::class, "approveOrCreateMusic"]);
     });
     
