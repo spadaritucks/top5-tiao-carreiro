@@ -1,0 +1,31 @@
+button{
+    height: 50px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+button:disabled{
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.primary{
+    background-color: #90610a;
+    color: white;
+    border: none;
+}
+
+.primary:hover{
+    opacity: 0.5;
+}
+
+.secondary{
+    background-color: transparent;
+    border: 1px solid #90610a
+}
+
+.secondary:hover{
+    opacity: 0.5;
+}
