@@ -1,0 +1,29 @@
+.login-area{
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+}
+
+.login-area form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 350px;
+    height: 300px;
+    box-shadow: 3px 3px 3px 3px #ccc;
+    padding : 10px 20px
+}
+
+.submit-area{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
