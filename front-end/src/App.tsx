@@ -57,7 +57,6 @@ function App() {
           message="Efetue o seu Login!"
           severity='info'
         />
-
       )
       return null
     }
@@ -71,15 +70,12 @@ function App() {
 
     if (response) {
       if (response.status === 201) {
-        sessionStorage.setItem("token", response.token)
-        sessionStorage.setItem("user", JSON.stringify(response.user))
         setAlertComponent(
           <SimpleAlert
             message={response.message}
             severity='success'
           />
         )
-
       } else {
         setAlertComponent(
           <SimpleAlert
@@ -90,7 +86,6 @@ function App() {
         return null
       }
     }
-
   }
 
   const youtube_url = watch('youtube_url')
