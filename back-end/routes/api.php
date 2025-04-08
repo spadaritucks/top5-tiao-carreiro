@@ -27,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::prefix("/songs")->middleware(['auth:sanctum', 'is_admin'])->group(function () {
         Route::post('/',[MusicController::class, "approveOrCreateMusic"]);
+        Route::patch('/{id}', [MusicController::class, "updateSong"]);
+        Route::delete('/{id}', [MusicController::class, "deleteSong"]);
     });
     
 });

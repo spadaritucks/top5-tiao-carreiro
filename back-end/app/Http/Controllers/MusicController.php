@@ -158,4 +158,47 @@ class MusicController extends Controller
             ], 500);
         }
     }
+
+   
+
+    public function updateSong(Request $request, $id)
+    {
+        try {
+            $music = Music::findOrFail($id);
+            
+            $videoId = $this->extractYoutubeUrl($request->youtube_url);
+            $videoInfo = $this->getYoutubeVideoInfo($videoId);
+
+            $music->update([
+                "title" => $videoInfo['title'],
+                "thumb" => $videoInfo["thumb"],
+                "visualizations" => $videoInfo['visualizations']
+            ]);
+
+            return response()->json([
+                "message" => "Música atualizada com sucesso",
+                "music" => $music
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => "Erro ao atualizar a música: " . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function deleteSong($id)
+    {
+        try {
+            $music = Music::findOrFail($id);
+            $music->delete();
+
+            return response()->json([
+                "message" => "Música excluída com sucesso"
+            ], 200);
+        } catch (Exception $e) {
+            return response()->json([
+                "message" => "Erro ao excluir a música: " . $e->getMessage()
+            ], 500);
+        }
+    }
 }
